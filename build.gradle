@@ -1,0 +1,21 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "${jetbrainKotlinJvmVersion}"
+    id 'application'
+}
+
+group = "${group}"
+version = "${version}"
+
+apply from: "gradle/jetbrains.gradle"
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClassName = 'org.rooftop.vuser.Application'
+}

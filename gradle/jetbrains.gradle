@@ -1,0 +1,11 @@
+compileKotlin {
+    kotlinOptions.jvmTarget = "${jvmTarget}"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "${jvmTarget}"
+}
+
+dependencies {
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
+}
