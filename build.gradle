@@ -1,12 +1,14 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version "${jetbrainKotlinJvmVersion}"
-    id 'application'
+    id "org.jetbrains.kotlin.jvm" version "${jetbrainKotlinJvmVersion}"
+    id "application"
+    id "org.sonarqube" version "${sonarqubeVersion}"
 }
 
 group = "${group}"
 version = "${version}"
 
 apply from: "gradle/jetbrains.gradle"
+apply from: "gradle/sonar.gradle"
 
 repositories {
     mavenCentral()
