@@ -13,6 +13,7 @@ apply from: "gradle/jetbrains.gradle"
 apply from: "gradle/sonar.gradle"
 apply from: "gradle/gatling.gradle"
 apply from: "gradle/protobuf.gradle"
+apply from: "gradle/faker.gradle"
 
 repositories {
     mavenCentral()
