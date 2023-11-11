@@ -14,11 +14,8 @@ apply from: "gradle/sonar.gradle"
 apply from: "gradle/gatling.gradle"
 apply from: "gradle/protobuf.gradle"
 apply from: "gradle/faker.gradle"
+apply from: "gradle/test.gradle"
 
 repositories {
     mavenCentral()
-}
-
-test {
-    useJUnitPlatform()
 }
