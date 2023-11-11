@@ -2,7 +2,6 @@ package org.rooftop.vuser.data
 
 import net.datafaker.Faker
 import org.rooftop.api.identity.userCreateReq
-import kotlin.random.Random
 
 private val identityFaker = Faker()
 
@@ -15,5 +14,3 @@ val signUpRequest: () -> ByteArray = {
         password = identityFaker.password()
     }.toByteArray()
 }
-
-val signUpRequestUserCount: () -> Int = { Random.nextInt(10, 1000) }
