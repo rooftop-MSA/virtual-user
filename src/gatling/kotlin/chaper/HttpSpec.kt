@@ -1,3 +1,5 @@
+package chaper
+
 import io.gatling.javaapi.http.HttpDsl
 
 private const val BASE_URL = "http://localhost:8080"

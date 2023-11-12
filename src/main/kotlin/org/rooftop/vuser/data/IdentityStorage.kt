@@ -5,5 +5,7 @@ internal data object IdentityStorage {
     val user: MutableMap<Long, Pair<String, String>> = mutableMapOf()
     fun Pair<String, String>.name(): String = this.first
     fun Pair<String, String>.password(): String = this.second
+    fun getUserInfo(requestId: Long): Pair<String, String> = user[requestId]
+        ?: throw IllegalStateException("Cannot find user matched requestId $requestId")
 
 }

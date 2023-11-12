@@ -24,11 +24,18 @@ val signUpRequest: (Long) -> ByteArray = { requestId ->
 
 val loginRequest: (Long) -> ByteArray = { requestId ->
     val userLoginReq = userLoginReq {
-        val userInfo = IdentityStorage.user[requestId]
-            ?: throw IllegalStateException("Cannot find user matched requestId $requestId")
+        val userInfo = IdentityStorage.getUserInfo(requestId)
         this.name = userInfo.name()
         this.password = userInfo.password()
     }
 
     userLoginReq.toByteArray()
+}
+
+val userNameRequest: (Long) -> String = { requestId ->
+    IdentityStorage.getUserInfo(requestId).name()
+}
+
+val userPasswordRequest: (Long) -> String = { requestId ->
+    IdentityStorage.getUserInfo(requestId).password()
 }
