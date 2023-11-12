@@ -1,9 +1,9 @@
-package chaper
+package chapter
 
-import chaper.RequestPlaceHolder.BYTES_TOKEN
-import chaper.RequestPlaceHolder.BYTES_USER_GET_RES
-import chaper.RequestPlaceHolder.STRING_NAME
-import chaper.RequestPlaceHolder.STRING_PASSWORD
+import chapter.RequestPlaceHolder.BYTES_TOKEN
+import chapter.RequestPlaceHolder.BYTES_USER_GET_RES
+import chapter.RequestPlaceHolder.STRING_NAME
+import chapter.RequestPlaceHolder.STRING_PASSWORD
 import io.gatling.javaapi.core.CoreDsl.*
 import io.gatling.javaapi.http.HttpDsl.http
 import io.gatling.javaapi.http.HttpDsl.status

@@ -1,8 +1,8 @@
 import io.gatling.javaapi.core.CoreDsl.atOnceUsers
 import io.gatling.javaapi.core.CoreDsl.scenario
 import io.gatling.javaapi.core.Simulation
-import chaper.httpProtocol
-import chaper.signUpChapter
+import chapter.httpProtocol
+import chapter.signUpChapter
 import kotlin.random.Random
 
 class JustSignUpScenario : Simulation() {

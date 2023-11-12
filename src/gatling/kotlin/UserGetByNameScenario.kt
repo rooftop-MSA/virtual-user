@@ -1,9 +1,9 @@
 import io.gatling.javaapi.core.CoreDsl
 import io.gatling.javaapi.core.CoreDsl.scenario
 import io.gatling.javaapi.core.Simulation
-import chaper.httpProtocol
-import chaper.signUpChapter
-import chaper.userGetByNameChapter
+import chapter.httpProtocol
+import chapter.signUpChapter
+import chapter.userGetByNameChapter
 import kotlin.random.Random
 
 class UserGetByNameScenario : Simulation() {

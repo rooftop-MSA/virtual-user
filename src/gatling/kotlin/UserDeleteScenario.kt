@@ -1,7 +1,7 @@
 import io.gatling.javaapi.core.CoreDsl
 import io.gatling.javaapi.core.CoreDsl.scenario
 import io.gatling.javaapi.core.Simulation
-import chaper.*
+import chapter.*
 import kotlin.random.Random
 
 class UserDeleteScenario : Simulation() {

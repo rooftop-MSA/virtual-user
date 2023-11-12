@@ -1,4 +1,4 @@
-package chaper
+package chapter
 
 import io.gatling.javaapi.http.HttpDsl
 

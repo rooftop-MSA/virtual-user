@@ -1,4 +1,4 @@
-package chaper
+package chapter
 
 internal object RequestPlaceHolder {
     const val STRING_NAME = "string#name"
