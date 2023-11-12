@@ -1,52 +1,62 @@
 package chaper
 
+import chaper.RequestPlaceHolder.BYTES_TOKEN
+import chaper.RequestPlaceHolder.BYTES_USER_GET_RES
+import chaper.RequestPlaceHolder.STRING_NAME
+import chaper.RequestPlaceHolder.STRING_PASSWORD
 import io.gatling.javaapi.core.CoreDsl.*
 import io.gatling.javaapi.http.HttpDsl.http
 import io.gatling.javaapi.http.HttpDsl.status
 import org.rooftop.api.identity.UserGetRes
 import org.rooftop.api.identity.UserLoginRes
-import org.rooftop.vuser.data.loginRequest
-import org.rooftop.vuser.data.signUpRequest
-import org.rooftop.vuser.data.userNameRequest
-import org.rooftop.vuser.data.userPasswordRequest
+import org.rooftop.vuser.data.fakeUserInfo
+import org.rooftop.vuser.data.userCreateRequest
+import org.rooftop.vuser.data.userLoginRequest
 
 private const val VERSION = "/v1"
 
-internal val signUpChapter = exec(
-    http("sign up").post("$VERSION/users")
-        .body(
-            ByteArrayBody { signUpRequest.invoke(it.userId()) }
+internal val signUpChapter =
+    exec { session -> session.setAll(fakeUserInfo(STRING_NAME, STRING_PASSWORD)) }
+        .exec(http("sign up").post("$VERSION/users")
+            .body(
+                ByteArrayBody { session ->
+                    userCreateRequest(session[STRING_NAME]!!, session[STRING_PASSWORD]!!)
+                }
+            )
+            .check(status().`is`(200))
         )
-        .check(status().`is`(200))
-)
 
 internal val loginChapter = exec(
     http("login").post("$VERSION/logins")
         .body(
-            ByteArrayBody { loginRequest.invoke(it.userId()) }
+            ByteArrayBody { session ->
+                userLoginRequest(
+                    session[STRING_NAME]!!,
+                    session[STRING_PASSWORD]!!
+                )
+            }
         )
         .check(status().`is`(200))
-        .check(bodyString().saveAs("for debug"))
-        .check(bodyBytes().saveAs("bytes#token"))
+        .check(bodyBytes().saveAs(BYTES_TOKEN))
 )
 
 internal val userGetByNameChapter = exec(
     http("user get by name")["$VERSION/users"]
-        .queryParam("name") { userNameRequest(it.userId()) }
+        .queryParam("name") { it[STRING_NAME] }
         .check(status().`is`(200))
-        .check(bodyBytes().saveAs("bytes#user-get-res"))
+        .check(bodyBytes().saveAs(BYTES_USER_GET_RES))
 )
 
 internal val userDeleteChapter = exec(
     http("user delete").delete("$VERSION/users")
         .header("Authorization") {
-            val tokenByte: ByteArray = it["bytes#token"]!!
+            val tokenByte: ByteArray = it[BYTES_TOKEN]!!
             UserLoginRes.parseFrom(tokenByte).token
         }
         .header("id") {
-            val userGetResByte: ByteArray = it["bytes#user-get-res"]!!
+            val userGetResByte: ByteArray = it[BYTES_USER_GET_RES]!!
             UserGetRes.parseFrom(userGetResByte).id.toString()
         }
-        .header("password") { userPasswordRequest.invoke(it.userId()) }
+        .header("password") { it[STRING_PASSWORD] }
         .check(status().`is`(200))
 )
