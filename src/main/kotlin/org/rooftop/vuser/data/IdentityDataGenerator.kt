@@ -3,6 +3,7 @@ package org.rooftop.vuser.data
 import net.datafaker.Faker
 import org.rooftop.api.identity.userCreateReq
 import org.rooftop.api.identity.userLoginReq
+import org.rooftop.api.identity.userUpdateReq
 
 private val identityFaker = Faker()
 
@@ -26,4 +27,11 @@ fun userCreateRequest(name: String, password: String): ByteArray =
     userCreateReq {
         this.name = name
         this.password = password
+    }.toByteArray()
+
+fun userUpdateRequest(id: Long, newName: String, newPassword: String): ByteArray =
+    userUpdateReq {
+        this.id = id
+        this.newName = newName
+        this.newPassword = newPassword
     }.toByteArray()
